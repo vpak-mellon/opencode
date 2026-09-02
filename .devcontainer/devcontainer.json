@@ -3,16 +3,22 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:resolute"
+	"image": "mcr.microsoft.com/devcontainers/base:resolute",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
+	"features": {
+		"ghcr.io/devcontainers-extra/features/bun:1": {
+		"version": "latest"
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y lcov && curl https://qlty.sh | bash"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
