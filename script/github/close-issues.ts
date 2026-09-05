@@ -63,6 +63,13 @@ async function close(num: number) {
   console.log(`Closed https://github.com/${repo}/issues/${num}`)
 }
 
+async function closeIssues(nums: number[]): Promise<number> {
+  for (const num of nums) {
+    await close(num)
+  }
+  return nums.length
+}
+
 async function main() {
   let page = 1
   let closed = 0
@@ -89,24 +96,13 @@ async function main() {
         stale.push(i.number)
       } else {
         console.log(`\nFound fresh issue #${i.number}, stopping`)
-        if (stale.length > 0) {
-          for (const num of stale) {
-            await close(num)
-            closed++
-          }
-        }
+        closed += await closeIssues(stale)
         console.log(`Closed ${closed} issues total`)
         return
       }
     }
 
-    if (stale.length > 0) {
-      for (const num of stale) {
-        await close(num)
-        closed++
-      }
-    }
-
+    closed += await closeIssues(stale)
     page++
   }
 
