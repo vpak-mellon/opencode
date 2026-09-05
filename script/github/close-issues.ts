@@ -70,7 +70,7 @@ async function closeIssues(nums: number[]): Promise<number> {
   return nums.length
 }
 
-async function main() {
+export async function main() {
   let page = 1
   let closed = 0
 
