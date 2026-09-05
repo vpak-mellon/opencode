@@ -63,7 +63,7 @@ async function close(num: number) {
   console.log(`Closed https://github.com/${repo}/issues/${num}`)
 }
 
-async function main() {
+export async function main() {
   let page = 1
   let closed = 0
 
